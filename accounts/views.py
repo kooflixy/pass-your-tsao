@@ -1,19 +1,20 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.forms import AddAccountForm
 from accounts.models import Account
 from accounts.utils import DataMixin
 
-class ShowAccountsList(DataMixin, ListView):
+class ShowAccountsList(LoginRequiredMixin, DataMixin, ListView):
     template_name = 'accounts/accounts_list.html'
     context_object_name = 'accounts'
     title_page = 'Аккаунты'
 
     def get_queryset(self):
-        return Account.objects.get_queryset()
+        return Account.belonging.get_queryset(user=self.request.user)
 
-class ShowAccount(DataMixin, DetailView):
+class ShowAccount(LoginRequiredMixin, DataMixin, DetailView):
     model = Account
     template_name = 'accounts/account.html'
     account_id_kwarg = 'account_id'
@@ -24,13 +25,14 @@ class ShowAccount(DataMixin, DetailView):
         return self.get_mixin_context(context, title = context['account'].name)
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Account.objects, id=self.kwargs[self.account_id_kwarg])
+        return get_object_or_404(Account.belonging.get_queryset(user=self.request.user), id=self.kwargs[self.account_id_kwarg])
 
-class AddAccount(DataMixin, CreateView):
+class AddAccount(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddAccountForm
     title_page = 'Добавление аккаунта'
     template_name = 'accounts/add_account.html'
 
     def form_valid(self, form):
-        form.save(commit=False)
+        account = form.save(commit=False)
+        account.owner = self.request.user
         return super().form_valid(form)
