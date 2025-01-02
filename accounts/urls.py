@@ -6,5 +6,6 @@ from accounts import views
 app_name = 'accounts'
 
 urlpatterns = [
-    path('', views.ShowAccounts.as_view(), name='accounts')
+    path('', views.ShowAccountsList.as_view(), name='accounts'),
+    path('<int:account_id>/', views.ShowAccount.as_view(), name='account'),
 ]

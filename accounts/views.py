@@ -1,14 +1,26 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView, DetailView
 
 from accounts.models import Account
 from accounts.utils import DataMixin
 
-class ShowAccounts(DataMixin, ListView):
+class ShowAccountsList(DataMixin, ListView):
     template_name = 'accounts/accounts_list.html'
     context_object_name = 'accounts'
     title_page = 'Аккаунты'
 
     def get_queryset(self):
         return Account.objects.get_queryset()
+
+class ShowAccount(DataMixin, DetailView):
+    model = Account
+    template_name = 'accounts/account.html'
+    account_id_kwarg = 'account_id'
+    context_object_name = 'account'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return self.get_mixin_context(context, title = context['account'].name)
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Account.objects, id=self.kwargs[self.account_id_kwarg])

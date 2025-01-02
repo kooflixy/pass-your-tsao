@@ -4,7 +4,7 @@
 <ul>
     {% for account in accounts %}
     <li>
-        <h2>{{ account.name }}</h2>
+        <h2><a href='{{ account.get_absolute_url }}'>{{ account.name }}</a></h2>
         <br>
     </li>
     {% endfor %}
