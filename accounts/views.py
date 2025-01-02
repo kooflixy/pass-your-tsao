@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
+from accounts.forms import AddAccountForm
 from accounts.models import Account
 from accounts.utils import DataMixin
 
@@ -24,3 +25,12 @@ class ShowAccount(DataMixin, DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Account.objects, id=self.kwargs[self.account_id_kwarg])
+
+class AddAccount(DataMixin, CreateView):
+    form_class = AddAccountForm
+    title_page = 'Добавление аккаунта'
+    template_name = 'accounts/add_account.html'
+
+    def form_valid(self, form):
+        form.save(commit=False)
+        return super().form_valid(form)

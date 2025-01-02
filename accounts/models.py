@@ -8,7 +8,7 @@ class BelongingManager(models.Manager):
 
 class Account(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
-    username = models.CharField(max_length=255, verbose_name='Имя')
+    username = models.CharField(max_length=255, blank=True, null=True, verbose_name='Имя')
     email = models.CharField(max_length=255, blank=True, null=True, verbose_name='Почта')
     password = models.CharField(max_length=500, blank=True, null=True, verbose_name='Пароль')
     description = models.TextField(max_length=1000, blank=True, null=True, verbose_name='Описание')
