@@ -3,8 +3,9 @@ from django.shortcuts import render
 from django.views.generic import ListView
 
 from accounts.models import Account
+from accounts.utils import DataMixin
 
-class ShowAccounts(ListView):
+class ShowAccounts(DataMixin, ListView):
     template_name = 'accounts/accounts_list.html'
     context_object_name = 'accounts'
     title_page = 'Аккаунты'
