@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-error" >{{form.not_field_errors}}</div>
+
+    {% for f in form %}
+    <p><label class="form-label" for="{{f.id.for_label}}">{{f.label}}</label>{{f}}</p>
+    <div class="form-error">{{f.errors}}</div>
+    {% endfor %}
+    <p><button type="submit">Зарегистрироваться</button></p>
+</form>
+{% endblock %}
