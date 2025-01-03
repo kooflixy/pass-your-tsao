@@ -494,3 +494,8 @@ iframe {
 #text-register-btn {
   font-size: 17px;
 }
+
+.form-center-icon {
+  width: 10vh;
+  height: 10vh;
+}
