@@ -1,7 +1,7 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.http import HttpResponseNotFound
 from accounts.forms import AddAccountForm
 from accounts.models import Account
 from accounts.utils import DataMixin
@@ -38,3 +38,6 @@ class AddAccount(LoginRequiredMixin, DataMixin, CreateView):
         account = form.save(commit=False)
         account.owner = self.request.user
         return super().form_valid(form)
+
+def page_not_found(request, exception):
+    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
