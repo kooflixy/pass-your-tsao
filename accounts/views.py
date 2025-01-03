@@ -14,6 +14,7 @@ class ShowAccountsList(LoginRequiredMixin, DataMixin, ListView):
     def get_queryset(self):
         return Account.belonging.get_queryset(user=self.request.user)
 
+
 class ShowAccount(LoginRequiredMixin, DataMixin, DetailView):
     model = Account
     template_name = 'accounts/account.html'
@@ -26,6 +27,7 @@ class ShowAccount(LoginRequiredMixin, DataMixin, DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Account.belonging.get_queryset(user=self.request.user), id=self.kwargs[self.account_id_kwarg])
+
 
 class AddAccount(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddAccountForm

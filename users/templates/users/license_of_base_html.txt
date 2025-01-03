@@ -1,0 +1,7 @@
+users/templates/base.html,
+users/static/users/css/,
+users/static/users/fonts/,
+users/static/users/js/,
+users/static/users/vendor/,
+
+were downloaded from https://colorlib.com/wp/template/login-form-v2/ and were used and changed by "CC BY 3.0" license

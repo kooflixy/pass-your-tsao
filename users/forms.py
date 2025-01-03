@@ -5,12 +5,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(
         label = 'Логин',
-        widget=forms.TextInput(),
+        widget=forms.TextInput(attrs={'class': 'input100'}),
     )
 
     password = forms.CharField(
         label = 'Пароль',
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'class': 'input100'}),
     )
 
     class Meta:
@@ -20,18 +20,19 @@ class LoginUserForm(AuthenticationForm):
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(
-        label = 'Логин'
+        label = 'Логин',
+        widget = forms.TextInput(attrs={'class': 'input100'}),
     )
 
     password1 = forms.CharField(
         label = 'Пароль',
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'class': 'input100'}),
     )
 
 
     password2 = forms.CharField(
         label = 'Повтор пароля',
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'class': 'input100'}),
     )
 
     class Meta:
@@ -42,5 +43,5 @@ class RegisterUserForm(UserCreationForm):
         }
 
         widgets = {
-            'email': forms.EmailInput(),
+            'email': forms.EmailInput(attrs={'class': 'input100'}),
         }
