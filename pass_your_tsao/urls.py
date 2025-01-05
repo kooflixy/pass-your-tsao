@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from accounts.views import page_not_found
+from accounts.views import home, page_not_found
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home, name='home'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('users/', include('users.urls', namespace='users')),
 ]

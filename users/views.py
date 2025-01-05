@@ -9,7 +9,7 @@ from users.forms import LoginUserForm, RegisterUserForm
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect(reverse('users:login'))
+    return HttpResponseRedirect(reverse('home'))
 
 class LoginUser(LoginView):
     form_class = LoginUserForm

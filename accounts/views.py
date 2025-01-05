@@ -6,6 +6,13 @@ from accounts.forms import AddAccountForm
 from accounts.models import Account
 from accounts.utils import DataMixin
 
+def home(request):
+    data = {
+        'title': 'Главная',
+        'user': request.user,
+    }
+    return render(request, template_name='accounts/home.html')
+
 class ShowAccountsList(LoginRequiredMixin, DataMixin, ListView):
     template_name = 'accounts/accounts_list.html'
     context_object_name = 'accounts'
