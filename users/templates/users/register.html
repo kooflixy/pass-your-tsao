@@ -7,13 +7,6 @@
     {% csrf_token %}
     <div class="form-error" >{{form.not_field_errors}}</div>
 
-    <span class="login100-form-title p-b-26">
-        Регистрация
-    </span>
-    <span class="login100-form-title p-b-48">
-        <img class="form-center-icon" src="{% static 'users/imgs/icons/icon.png' %}">
-    </span>
-
     {% for f in form %}
         {% if f.label == 'Пароль' or f.label == 'Повтор пароля' %}
         <div class="wrap-input100 validate-input">
